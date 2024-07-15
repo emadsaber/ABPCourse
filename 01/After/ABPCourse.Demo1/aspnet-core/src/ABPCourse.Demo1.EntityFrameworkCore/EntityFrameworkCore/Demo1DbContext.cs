@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ABPCourse.Demo1.Configurations;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -53,6 +54,9 @@ public class Demo1DbContext :
 
     #endregion
 
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+
     public Demo1DbContext(DbContextOptions<Demo1DbContext> options)
         : base(options)
     {
@@ -74,13 +78,7 @@ public class Demo1DbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-        /* Configure your own tables/entities inside here */
-
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(Demo1Consts.DbTablePrefix + "YourEntities", Demo1Consts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.ApplyConfiguration(new ProductConfiguration());
+        builder.ApplyConfiguration(new CategoryConfiguration());
     }
 }
