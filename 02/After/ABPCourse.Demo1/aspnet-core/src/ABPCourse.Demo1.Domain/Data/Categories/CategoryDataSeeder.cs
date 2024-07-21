@@ -15,9 +15,11 @@ namespace ABPCourse.Demo1.Data
             this.categoriesRepository = categoriesRepository;
         }
 
-        public Task SeedAsync(DataSeedContext context)
+        public async Task SeedAsync(DataSeedContext context)
         {
-            var categories = new List<Category>()
+            if (!await categoriesRepository.AnyAsync())
+            {
+                var categories = new List<Category>()
             {
                 new Category(id: 1,
                             nameAr:"أطعمة ومشروبات",
@@ -41,7 +43,8 @@ namespace ABPCourse.Demo1.Data
                              descriptionEn: "all reusable and non-reusable plastic materials"),
             };
 
-            return this.categoriesRepository.InsertManyAsync(categories);
+                await this.categoriesRepository.InsertManyAsync(categories);
+            }
         }
     }
 }
