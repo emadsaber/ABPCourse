@@ -1,0 +1,38 @@
+# restore packages
+yarn
+
+# generate proxy (needs to run backend first)
+abp generate-proxy -t ng
+
+# Install Angular CLI (if not installed)
+npm i -g @angular/cli
+
+# Test generate categories module with routing
+ng g m modules/categories --routing --dry-run
+
+# Generate categories module with routing
+ng g m modules/categories --routing 
+
+# Test generate products module with routing
+ng g m modules/products --routing --dry-run
+
+# Generate products module with routing
+ng g m modules/products --routing 
+
+# Test Generate List Categories Component
+ng g c modules/categories/listCategories -m Categories --skip-tests --dry-run
+
+# Generate List Categories Component
+ng g c modules/categories/listCategories -m Categories --skip-tests 
+
+# Test Generate List Products Component
+ng g c modules/products/listProducts -m Products --skip-tests --dry-run
+
+# Generate List Products Component
+ng g c modules/products/listProducts -m Products --skip-tests 
+
+# Generate add category component
+ng g c modules/categories/addCategory -m Categories --skip-tests
+
+# Generate add Products component
+ng g c modules/products/addProduct -m Products --skip-tests
