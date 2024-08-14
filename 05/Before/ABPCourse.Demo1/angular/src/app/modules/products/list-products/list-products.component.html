@@ -1,0 +1,34 @@
+<button class="btn btn-primary" (click)="addProduct()">Add Product</button>
+
+@if(products.length > 0){
+    <table class="table" id="tblGrid">
+        <caption>
+        </caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name Arabic</th>
+                <th>Name English</th>
+                <th>Description Arabic</th>
+                <th>Description English</th>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(product of products; track $index){
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ product.nameAr }}</td>
+                    <td>{{ product.nameEn }}</td>
+                    <td>{{ product.descriptionAr }}</td>
+                    <td>{{ product.descriptionEn }}</td>
+                    <td>{{ product.categoryNameAr }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}@else{
+    <div class="alert alert-info" role="alert">
+        No Products found
+    </div>
+}
