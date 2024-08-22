@@ -1,0 +1,101 @@
+<div class="card pt-3">
+    <form class="card-body" [formGroup]="searchForm">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="filter">Name Or Description:</label>
+                <input type="text" class="form-control" id="filter" formControlName="filter">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="categoryId">Category:</label>
+                    <select class="form-control" formControlName="categoryId">
+                        @for(category of categories; track $index){
+                        <option [value]="category.id">{{ category.nameEn }}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="text-right">
+                <button class="btn btn-primary" (click)="searchProducts()">Search</button>
+                <button class="btn btn-secondary m-2" (click)="addProduct()">Add Product</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- <table class="table" id="tblGrid">
+    <caption>
+    </caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name Arabic</th>
+            <th>Name English</th>
+            <th>Description Arabic</th>
+            <th>Description English</th>
+            <th>Category Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(product of products; track $index){
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ product.nameAr }}</td>
+            <td>{{ product.nameEn }}</td>
+            <td>{{ product.descriptionAr }}</td>
+            <td>{{ product.descriptionEn }}</td>
+            <td>{{ product.categoryNameAr }}</td>
+        </tr>
+        }
+    </tbody>
+</table> -->
+
+<ngx-datatable class="material" 
+    [rows]="(products$ | async)?.items || []" 
+    [count]="(products$ | async)?.totalCount || 0" 
+    [columnMode]="'force'"
+    [headerHeight]="50" 
+    [footerHeight]="50" 
+    [rowHeight]="50"
+    [footerHeight]="50"
+    [limit]="5">
+    <ngx-datatable-column name="Name Arabic" prop="nameAr">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.nameAr }}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Name English" prop="nameEn">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nameEn}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Description Arabic" prop="descriptionAr">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.descriptionAr }}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Description English" prop="descriptionEn">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.descriptionEn}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Category Arabic" prop="categoryNameAr">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.categoryNameAr}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Category English" prop="categoryNameEn">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.categoryNameEn}}
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>
