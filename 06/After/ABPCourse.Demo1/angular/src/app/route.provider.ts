@@ -28,6 +28,7 @@ function configureRoutes(routesService: RoutesService) {
         iconClass: 'fas fa-box',
         order: 3,
         layout: eLayoutType.application,
+        requiredPolicy: 'Demo1.Products.List',
       },
     ]);
   };

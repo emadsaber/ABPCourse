@@ -9,6 +9,6 @@ import { ProductsRoutingModule } from './products-routing.module';
   imports: [
     CommonModule,
     ProductsRoutingModule
-  ]
+  ],
 })
 export class ProductsModule { }

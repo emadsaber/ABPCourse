@@ -21,7 +21,10 @@
         <div class="row pt-3">
             <div class="text-right">
                 <button class="btn btn-primary" (click)="searchProducts()">Search</button>
-                <button class="btn btn-secondary m-2" (click)="addProduct()">Add Product</button>
+                <!-- <button class="btn btn-secondary m-2" (click)="addProduct()">Add Product</button> -->
+                <!-- <button *abpPermission="'Demo1.Products.CreateEdit'" class="btn btn-secondary m-2" (click)="addProduct()">Add Product</button> -->
+                <button *ngIf="canCreate" class="btn btn-secondary m-2" (click)="addProduct()">Add Product</button>
+
             </div>
         </div>
     </form>

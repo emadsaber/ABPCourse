@@ -1,4 +1,4 @@
-import { ListService, PagedResultDto } from '@abp/ng.core';
+import { ListService, PagedResultDto, PermissionService } from '@abp/ng.core';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,12 +22,14 @@ export class ListProductsComponent {
   categories: CategoryDto[] = [];
   // count: number;
   products$: Observable<PagedResultDto<ProductDto>>;
-  
+  canCreate: boolean;
+
   constructor(private productsService: ProductsService,
     private router: Router,
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
-    public readonly list: ListService<GetProductListDto>
+    public readonly list: ListService<GetProductListDto>,
+    private permissionService: PermissionService
   ) {
     this.buildForm();
   }
@@ -36,6 +38,9 @@ export class ListProductsComponent {
       this.categories = res.items;
     });
     this.searchProducts();
+
+    this.canCreate = this.permissionService.getGrantedPolicy('Demo1.Products.CreateEdit');
+
   }
 
   buildForm() {
