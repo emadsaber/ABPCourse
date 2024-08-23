@@ -3,6 +3,11 @@
   "texts": {
     "Menu:Home": "الصفحة الرئيسية",
     "Welcome": "مرحباً",
-    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io."
+    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io.",
+    "Demo1.Products": "المنتجات",
+    "Permission:Products:CreateEditProduct": "إنشاء وتعديل منتج",
+    "Permission:Products:GetProduct": "عرض منتج",
+    "Permission:Products:ListProduct": "عرض المنتجات",
+    "Permission:Products:DeleteProduct": "حذف المنتج"
   }
 }

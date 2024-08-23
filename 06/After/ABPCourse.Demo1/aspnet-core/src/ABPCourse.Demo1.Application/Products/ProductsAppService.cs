@@ -1,4 +1,6 @@
 ﻿using ABPCourse.Demo1.Bases;
+using ABPCourse.Demo1.Permissions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Authorization;
 using Volo.Abp.Domain.Repositories;
 
 namespace ABPCourse.Demo1.Products
@@ -24,6 +27,7 @@ namespace ABPCourse.Demo1.Products
         #endregion constructor
 
         #region IProductsAppService
+        [Authorize(Demo1Permissions.CreateEditProductPermission)]
         public async Task<ProductDto> CreateProductAsync(CreateUpdateProductDto input)
         {
             //validation
@@ -39,6 +43,7 @@ namespace ABPCourse.Demo1.Products
             return ObjectMapper.Map<Product, ProductDto>(inserted);
         }
 
+        [Authorize(Demo1Permissions.CreateEditProductPermission)]
         public async Task<ProductDto> UpdateProductAsync(CreateUpdateProductDto input)
         {
             //validation
@@ -60,6 +65,7 @@ namespace ABPCourse.Demo1.Products
         }
 
 
+        [Authorize(Demo1Permissions.DeleteProductPermission)]
         public async Task<bool> DeleteProductAsync(int id)
         {
             var existingProduct = await productsRepository.GetAsync(id);
@@ -72,6 +78,7 @@ namespace ABPCourse.Demo1.Products
             return true;
         }
 
+        [Authorize(Demo1Permissions.ListProductPermission)]
         public async Task<PagedResultDto<ProductDto>> GetListAsync(GetProductListDto input)
         {
             if (input.Sorting.IsNullOrWhiteSpace())
@@ -108,6 +115,7 @@ namespace ABPCourse.Demo1.Products
             );
         }
 
+        [Authorize(Demo1Permissions.GetProductPermission)]
         public async Task<ProductDto> GetProductAsync(int id)
         {
             var product = await productsRepository
@@ -122,12 +130,27 @@ namespace ABPCourse.Demo1.Products
             return ObjectMapper.Map<Product, ProductDto>(product);
         }
 
+        [AllowAnonymous]
         public Task<bool> LabTestProductAsync(int id)
         {
             //call lab test service
 
             return Task.FromResult(true);
         }
+
+        public async Task<bool> TestComplexPermissions()
+        {
+            var result = await AuthorizationService.AuthorizeAsync(Demo1Permissions.CreateEditProductPermission);
+            if (result.Succeeded == false)
+            {
+                //throw exception
+                throw new AbpAuthorizationException("You don't have permission for this action");
+            }
+
+            return true;
+        }
+
         #endregion IProductsAppService
     }
 }
+
