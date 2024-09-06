@@ -4,10 +4,7 @@
     "Menu:Home": "Home",
     "Welcome": "Welcome",
     "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
-    "Demo1.Products": "Products",
-    "Permission:Products:CreateEditProduct": "Create / Edit Product",
-    "Permission:Products:GetProduct": "Get Product",
-    "Permission:Products:ListProduct": "List Product",
-    "Permission:Products:DeleteProduct": "Delete Product"
+    "Required": "This field is required",
+    "MaxLength": "الحد الأقصى للطول هو {0} حرف"
   }
 }

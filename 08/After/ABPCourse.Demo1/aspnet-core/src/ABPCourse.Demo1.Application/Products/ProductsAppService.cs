@@ -2,6 +2,7 @@
 using ABPCourse.Demo1.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,16 @@ namespace ABPCourse.Demo1.Products
     public class ProductsAppService : BaseApplicationService, IProductsAppService
     {
         #region fields
-        private readonly IRepository<Product, int> productsRepository; 
+        private readonly IRepository<Product, int> productsRepository;
+        private readonly IStringLocalizerFactory localizerFactory;
         #endregion
 
         #region constructor
-        public ProductsAppService(IRepository<Product, int> productsRepository)
+        public ProductsAppService(IRepository<Product, int> productsRepository,
+            IStringLocalizerFactory localizerFactory)
         {
             this.productsRepository = productsRepository;
+            this.localizerFactory = localizerFactory;
         }
         #endregion constructor
 
@@ -31,7 +35,7 @@ namespace ABPCourse.Demo1.Products
         public async Task<ProductDto> CreateProductAsync(CreateUpdateProductDto input)
         {
             //validation
-            var validateResult = new CreateUpdateProductValidator().Validate(input);
+            var validateResult = new CreateUpdateProductValidator(localizerFactory).Validate(input);
             if(!validateResult.IsValid)
             {
                 var exception = GetValidationException(validateResult);
@@ -47,7 +51,7 @@ namespace ABPCourse.Demo1.Products
         public async Task<ProductDto> UpdateProductAsync(CreateUpdateProductDto input)
         {
             //validation
-            var validateResult = new CreateUpdateProductValidator().Validate(input);
+            var validateResult = new CreateUpdateProductValidator(localizerFactory).Validate(input);
             if (!validateResult.IsValid)
             {
                 var exception = GetValidationException(validateResult);

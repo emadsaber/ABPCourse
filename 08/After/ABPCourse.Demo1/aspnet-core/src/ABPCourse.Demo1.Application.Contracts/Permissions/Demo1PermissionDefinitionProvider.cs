@@ -18,6 +18,6 @@ public class Demo1PermissionDefinitionProvider : PermissionDefinitionProvider
 
     private static LocalizableString L(string name)
     {
-        return LocalizableString.Create<Demo1Resource>(name);
+        return LocalizableString.Create<ProductsResource>(name);
     }
 }

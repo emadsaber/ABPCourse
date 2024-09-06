@@ -17,9 +17,15 @@ import { AbpOAuthModule } from '@abp/ng.oauth';
 import { ThemeLeptonXModule } from '@abp/ng.theme.lepton-x';
 import { SideMenuLayoutModule } from '@abp/ng.theme.lepton-x/layouts';
 import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VALIDATION_BLUEPRINTS } from "@ngx-validate/core";
+import { DEFAULT_VALIDATION_BLUEPRINTS } from "@abp/ng.theme.shared";
+
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule.forRoot({
@@ -27,14 +33,20 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
       registerLocaleFn: registerLocale(),
     }),
     AbpOAuthModule.forRoot(),
-    ThemeSharedModule.forRoot(),
-    
+    ThemeSharedModule.forRoot({
+      validation: {
+        blueprints: {
+          uniqueUsername: "::AlreadyExists[{{ username }}]",
+        },
+      }
+    }),
+
     AccountConfigModule.forRoot(),
     IdentityConfigModule.forRoot(),
     TenantManagementConfigModule.forRoot(),
     SettingManagementConfigModule.forRoot(),
-    
-    
+
+
     FeatureManagementModule.forRoot(),
     InternetConnectionStatusComponent,
     ThemeLeptonXModule.forRoot(),
@@ -42,7 +54,16 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
     AccountLayoutModule.forRoot()
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER],
+  providers: [
+    APP_ROUTE_PROVIDER,
+    {
+      provide: VALIDATION_BLUEPRINTS,
+      useValue: {
+        ...DEFAULT_VALIDATION_BLUEPRINTS,
+        required: "::Required",
+        maxlength: "::MaxLength[{{ requiredLength }}]",
+      },
+    },],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

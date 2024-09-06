@@ -23,7 +23,7 @@ namespace ABPCourse.Demo1;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
+    typeof(AbpTenantManagementDomainSharedModule)
     )]
 public class Demo1DomainSharedModule : AbpModule
 {
@@ -43,16 +43,22 @@ public class Demo1DomainSharedModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<Demo1Resource>("en")
+                .Add<Demo1Resource>(defaultCultureName: "en")
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/Demo1");
+
+            options.Resources
+                .Add<ProductsResource>(defaultCultureName: "en")
+                .AddBaseTypes(typeof(AbpValidationResource))
+                .AddVirtualJson("/Localization/Products");
 
             options.DefaultResourceType = typeof(Demo1Resource);
         });
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("Demo1", typeof(Demo1Resource));
+            options.MapCodeNamespace("Demo1.Products", typeof(ProductsResource));
         });
+
     }
 }

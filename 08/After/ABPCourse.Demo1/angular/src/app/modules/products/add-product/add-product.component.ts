@@ -6,8 +6,6 @@ import { CreateUpdateProductDto, ProductsService } from '@proxy/products';
 
 @Component({
   selector: 'app-add-product',
-  standalone: true,
-  imports: [ReactiveFormsModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss'
 })
@@ -35,7 +33,7 @@ export class AddProductComponent {
       nameAr: new FormControl('', [Validators.required, Validators.maxLength(300)]),
       nameEn: new FormControl('', [Validators.required, Validators.maxLength(300)]),
       descriptionAr: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
-      descriptionEn: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      descriptionEn: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
       categoryId: new FormControl(null, [Validators.required]),
     });
   }

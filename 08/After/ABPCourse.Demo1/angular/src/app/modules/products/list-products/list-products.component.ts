@@ -10,11 +10,8 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-products',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgxDatatableModule, CommonModule],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.scss',
-  providers: [ListService]
 })
 export class ListProductsComponent {
   //products: ProductDto[] = [];
