@@ -1,0 +1,26 @@
+{
+  "culture": "en",
+  "texts": {
+    "Demo1.Products": "Products",
+    "Permission:Products:CreateEditProduct": "Create / Edit Product",
+    "Permission:Products:GetProduct": "Get Product",
+    "Permission:Products:ListProduct": "List Product",
+    "Permission:Products:DeleteProduct": "Delete Product",
+    "Products:InvalidProductNameAr": "Product Name in Arabic is invalid",
+    "Products:InvalidProductNameEn": "Product Name in English is invalid",
+    "Products:InvalidProductDescAr": "Product Description in Arabic is invalid",
+    "Products:InvalidProductDescEn": "Product Description in English is invalid",
+    "Products:InvalidProductCategory": "Product Category is invalid",
+    "AddProduct:ProductNameAr": "Product Name Arabic",
+    "AddProduct:ProductNameEn": "Product Name English",
+    "AddProduct:ProductDescAr": "Product Description Arabic",
+    "AddProduct:ProductDescEn": "Product Description English",
+    "AddProduct:ProductCategory": "Product Category",
+    "Demo1.Products:STORE_PRODUCTS_0001": "Product not found!",
+    "Demo1.Products:STORE_PRODUCTS_0002": "Product name in Arabic is Invalid!",
+    "Demo1.Products:STORE_PRODUCTS_0003": "Product name in English is Invalid",
+    "Demo1.Products:STORE_PRODUCTS_0004": "Product Description in Arabic is Invalid",
+    "Demo1.Products:STORE_PRODUCTS_0005": "Product Description in English is Invalid",
+    "Demo1.Products:STORE_PRODUCTS_0006": "Product Category is Invalid"
+  }
+}

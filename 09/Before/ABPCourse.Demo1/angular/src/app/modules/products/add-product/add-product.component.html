@@ -1,0 +1,34 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="form-control-label" for="nameAr">{{'Products::AddProduct:ProductNameAr' | abpLocalization}}:</label>
+            <input type="text" class="form-control" id="nameAr" formControlName="nameAr" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label" for="nameEn">{{'Products::AddProduct:ProductNameEn' | abpLocalization}}:</label>
+            <textarea class="form-control" id="nameEn" formControlName="nameEn"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label" for="descriptionAr">{{'Products::AddProduct:ProductDescAr' | abpLocalization}}:</label>
+            <textarea class="form-control" id="descriptionAr" formControlName="descriptionAr"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label" for="descriptionEn">{{'Products::AddProduct:ProductDescEn' | abpLocalization}}:</label>
+            <textarea class="form-control" id="descriptionEn" formControlName="descriptionEn"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label" for="descriptionEn">{{'Products::AddProduct:ProductCategory' | abpLocalization}}:</label>
+            <select class="form-control" formControlName="categoryId">
+                @for(category of categories; track $index){
+                    <option [value]="category.id">{{ category.nameEn }}</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="!productForm.valid" type="submit">Add Product</button>
+    <button class="btn btn-secondary" (click)="back()">Back</button>
+</form>

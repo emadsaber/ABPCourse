@@ -1,0 +1,26 @@
+{
+  "culture": "ar",
+  "texts": {
+    "Demo1.Products": "المنتجات",
+    "Permission:Products:CreateEditProduct": "إنشاء وتعديل منتج",
+    "Permission:Products:GetProduct": "عرض منتج",
+    "Permission:Products:ListProduct": "عرض المنتجات",
+    "Permission:Products:DeleteProduct": "حذف المنتج",
+    "Products:InvalidProductNameAr": "اسم المنتج باللغة العربية غير صالح",
+    "Products:InvalidProductNameEn": "اسم المنتج باللغة الانجليزية غير صالح",
+    "Products:InvalidProductDescAr": "وصف المنتج باللغة العربية غير صالح",
+    "Products:InvalidProductDescEn": "وصف المنتج باللغة الانجليزية غير صالح",
+    "Products:InvalidProductCategory": "تصنيف المنتج غير صالح",
+    "AddProduct:ProductNameAr": "اسم المنتج باللغة العربية",
+    "AddProduct:ProductNameEn": "اسم المنتج باللغة الانجليزية",
+    "AddProduct:ProductDescAr": "وصف المنتج باللغة العربية",
+    "AddProduct:ProductDescEn": "وصف المنتج باللغة الانجليزية",
+    "AddProduct:ProductCategory": "التصنيف",
+    "Demo1.Products:STORE_PRODUCTS_0001": "المنتج غير موجود!",
+    "Demo1.Products:STORE_PRODUCTS_0002": "اسم المنتج باللغة العربية غير صالح!",
+    "Demo1.Products:STORE_PRODUCTS_0003": "اسم المنتج باللغة الانجليزية غير صالح!",
+    "Demo1.Products:STORE_PRODUCTS_0004": "وصف المنتج باللغة العربية غير صالح!",
+    "Demo1.Products:STORE_PRODUCTS_0005": "وصف المنتج باللغة الانجليزية غير صالح!",
+    "Demo1.Products:STORE_PRODUCTS_0006": "تصنيف المنتج غير صالح!"
+  }
+}
