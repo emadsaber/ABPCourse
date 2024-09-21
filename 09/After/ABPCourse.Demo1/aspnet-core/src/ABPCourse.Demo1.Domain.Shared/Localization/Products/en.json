@@ -21,6 +21,7 @@
     "Demo1.Products:STORE_PRODUCTS_0003": "Product name in English is Invalid",
     "Demo1.Products:STORE_PRODUCTS_0004": "Product Description in Arabic is Invalid",
     "Demo1.Products:STORE_PRODUCTS_0005": "Product Description in English is Invalid",
-    "Demo1.Products:STORE_PRODUCTS_0006": "Product Category is Invalid"
+    "Demo1.Products:STORE_PRODUCTS_0006": "Product Category is Invalid",
+    "Demo1.Products:STORE_PRODUCTS_0007": "Product already exists!"
   }
 }

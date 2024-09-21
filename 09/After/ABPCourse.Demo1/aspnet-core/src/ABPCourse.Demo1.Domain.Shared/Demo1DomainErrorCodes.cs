@@ -9,4 +9,5 @@ public static class Demo1DomainErrorCodes
     public const string INVALID_PRODUCT_DATA_DESC_AR = NAMESPACE + "STORE_PRODUCTS_0004";
     public const string INVALID_PRODUCT_DATA_DESC_EN = NAMESPACE + "STORE_PRODUCTS_0005";
     public const string INVALID_PRODUCT_CATEGORY = NAMESPACE + "STORE_PRODUCTS_0006";
+    public const string PRODUCT_ALREADY_EXISTS = NAMESPACE + "STORE_PRODUCTS_0007";
 }

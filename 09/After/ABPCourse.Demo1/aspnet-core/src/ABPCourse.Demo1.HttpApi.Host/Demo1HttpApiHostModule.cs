@@ -29,6 +29,9 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Auditing;
+using Volo.Abp.Domain.Entities;
+using Volo.Abp.AspNetCore.Auditing;
 
 namespace ABPCourse.Demo1;
 
@@ -62,7 +65,7 @@ public class Demo1HttpApiHostModule : AbpModule
     {
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
-
+        ConfigureAuditing(context);
         ConfigureAuthentication(context);
         ConfigureBundles();
         ConfigureUrls(configuration);
@@ -70,6 +73,22 @@ public class Demo1HttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+    }
+
+    private void ConfigureAuditing(ServiceConfigurationContext context)
+    {
+        Configure<AbpAuditingOptions>(options =>
+        {
+            options.IsEnabled = true;
+            options.EntityHistorySelectors.AddAllEntities();
+            //options.EntityHistorySelectors.Add(new NamedTypeSelector("Products", type => typeof(IEntity).IsAssignableFrom(type));
+        });
+
+        Configure<AbpAspNetCoreAuditingOptions>(options =>
+        {
+            options.IgnoredUrls.Add("/Account");
+            options.IgnoredUrls.Add("/connect");
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Auditing;
 using Volo.Abp.Authorization;
 using Volo.Abp.Domain.Repositories;
 
@@ -19,19 +20,22 @@ namespace ABPCourse.Demo1.Products
         #region fields
         private readonly IRepository<Product, int> productsRepository;
         private readonly IStringLocalizerFactory localizerFactory;
+        private readonly IProductService productService;
         #endregion
 
         #region constructor
         public ProductsAppService(IRepository<Product, int> productsRepository,
-            IStringLocalizerFactory localizerFactory)
+            IStringLocalizerFactory localizerFactory,
+            IProductService productService)
         {
             this.productsRepository = productsRepository;
             this.localizerFactory = localizerFactory;
+            this.productService = productService;
         }
         #endregion constructor
 
         #region IProductsAppService
-        [Authorize(Demo1Permissions.CreateEditProductPermission)]
+        //[Authorize(Demo1Permissions.CreateEditProductPermission)]
         public async Task<ProductDto> CreateProductAsync(CreateUpdateProductDto input)
         {
             //validation
@@ -43,11 +47,19 @@ namespace ABPCourse.Demo1.Products
             }
 
             var product = ObjectMapper.Map<CreateUpdateProductDto, Product>(input);
+
+            //check if product exists
+            var exists = await productService.Exists(product);
+            if (exists)
+            {
+                throw new ProductAlreadyExistsException(product.NameEn);
+            }
+
             var inserted = await productsRepository.InsertAsync(product, autoSave: true);
             return ObjectMapper.Map<Product, ProductDto>(inserted);
         }
 
-        [Authorize(Demo1Permissions.CreateEditProductPermission)]
+        //[Authorize(Demo1Permissions.CreateEditProductPermission)]
         public async Task<ProductDto> UpdateProductAsync(CreateUpdateProductDto input)
         {
             //validation
@@ -69,7 +81,7 @@ namespace ABPCourse.Demo1.Products
         }
 
 
-        [Authorize(Demo1Permissions.DeleteProductPermission)]
+        //[Authorize(Demo1Permissions.DeleteProductPermission)]
         public async Task<bool> DeleteProductAsync(int id)
         {
             var existingProduct = await productsRepository.GetAsync(id);
