@@ -1,0 +1,30 @@
+@if(categories){
+    <table class="table" id="tblGrid">
+        <caption>
+        </caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name Arabic</th>
+                <th>Name English</th>
+                <th>Description Arabic</th>
+                <th>Description English</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(category of categories; track $index){
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ category.nameAr }}</td>
+                    <td>{{ category.nameEn }}</td>
+                    <td>{{ category.descriptionAr }}</td>
+                    <td>{{ category.descriptionEn }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}@else{
+    <div class="alert alert-info" role="alert">
+        No categories found
+    </div>
+}
