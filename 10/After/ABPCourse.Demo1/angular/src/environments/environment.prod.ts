@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://localhost:44360';
 
 export const environment = {
   production: true,
@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44388/',
+    issuer: 'https://localhost:44361/',
     redirectUri: baseUrl,
     clientId: 'Demo1_App',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44388',
+      url: 'https://localhost:44361',
       rootNamespace: 'ABPCourse.Demo1',
     },
   },

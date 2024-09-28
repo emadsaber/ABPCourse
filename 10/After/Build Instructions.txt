@@ -1,0 +1,30 @@
+# seed the target database using DbMigrator
+
+# Add required middlewares in backend
+
+# generate self-signed certificate
+
+dotnet dev-certs https -v -ep openiddict.pfx -p 00000000-0000-0000-0000-000000000000
+
+# update .gitignore to remove .pfx
+
+# Right-click on openiddict.pfx, Git -> add ignored file to source control
+
+# Update OpenIdDictApplications table with correct URLs
+
+# Update frontend environment production file
+
+# Publish backend and frontend apps
+
+# Install ASP.NET Core Hosting Bundle
+https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer
+
+# Install required runtime files
+https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+
+# Change connection string to correct database server, if you are running on localhost, remove TrustedConnection part
+  "ConnectionStrings": {
+    "Default": "Server=localhost;Database=Demo1;TrustServerCertificate=True;User Id=sa;Password=123456",
+  },
+
+# check appsettings CORS origin and RedirectAllowedUrls and correct your ports
