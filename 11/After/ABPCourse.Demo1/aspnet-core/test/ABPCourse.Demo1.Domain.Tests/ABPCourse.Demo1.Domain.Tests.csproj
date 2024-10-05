@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ABPCourse.Demo1</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ABPCourse.Demo1.Domain\ABPCourse.Demo1.Domain.csproj" />
+    <ProjectReference Include="..\ABPCourse.Demo1.TestBase\ABPCourse.Demo1.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>
