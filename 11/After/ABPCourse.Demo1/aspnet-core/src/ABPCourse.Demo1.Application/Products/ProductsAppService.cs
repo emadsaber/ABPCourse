@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
 using Volo.Abp.Authorization;
+using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.MultiTenancy;
+using Volo.Abp.TenantManagement;
 
 namespace ABPCourse.Demo1.Products
 {
@@ -21,16 +24,25 @@ namespace ABPCourse.Demo1.Products
         private readonly IRepository<Product, int> productsRepository;
         private readonly IStringLocalizerFactory localizerFactory;
         private readonly IProductService productService;
+        private readonly ITenantRepository tenantsRepo;
+        private readonly IRepository<TenantConnectionString> tenantConnectionStrings;
+        private readonly IDataFilter dataFilter;
         #endregion
 
         #region constructor
         public ProductsAppService(IRepository<Product, int> productsRepository,
             IStringLocalizerFactory localizerFactory,
-            IProductService productService)
+            IProductService productService, 
+            ITenantRepository tenantsRepo,
+            IRepository<TenantConnectionString> tenantConnectionStrings,
+            IDataFilter dataFilter)
         {
             this.productsRepository = productsRepository;
             this.localizerFactory = localizerFactory;
             this.productService = productService;
+            this.tenantsRepo = tenantsRepo;
+            this.tenantConnectionStrings = tenantConnectionStrings;
+            this.dataFilter = dataFilter;
         }
         #endregion constructor
 
@@ -164,6 +176,40 @@ namespace ABPCourse.Demo1.Products
             }
 
             return true;
+        }
+
+        public async Task<Dictionary<string, int>> GetProductsOfTenant()
+        {
+            var result = new Dictionary<string, int>();
+
+            var tenants = await tenantsRepo.GetListAsync();
+
+            foreach (var t in tenants)
+            {
+                using (CurrentTenant.Change(t.Id))
+                {
+                    result.Add($"{t.Name} Products", await productsRepository.CountAsync());
+                }
+            }
+
+            //Get count on all tenants
+            using (dataFilter.Disable<IMultiTenant>())
+            {
+                result.Add("All Products Count", await productsRepository.CountAsync());
+            }
+
+            return result;
+        }
+
+        public async Task ChangeTenantsConnectionString()
+        {
+            var tenants = await tenantsRepo.GetListAsync();
+
+            foreach (var t in tenants)
+            {
+                var connstr = $"Server=.;Database=Demo1_{t.Name};Trusted_Connection=True;TrustServerCertificate=True";
+                await tenantConnectionStrings.InsertAsync(new TenantConnectionString(t.Id, ConnectionStrings.DefaultConnectionStringName, connstr));
+            }
         }
 
         #endregion IProductsAppService

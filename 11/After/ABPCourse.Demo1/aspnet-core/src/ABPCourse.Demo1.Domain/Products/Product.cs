@@ -1,8 +1,10 @@
-﻿using Volo.Abp.Domain.Entities.Auditing;
+﻿using System;
+using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace ABPCourse.Demo1;
 
-public class Product : FullAuditedEntity<int>
+public class Product : FullAuditedEntity<int>, IMultiTenant
 {
     public string NameAr { get; set; }
 
@@ -15,5 +17,6 @@ public class Product : FullAuditedEntity<int>
     public int CategoryId { get; set; }
 
     public virtual Category Category { get; set; }
+    public Guid? TenantId { get; set; }
 
 }

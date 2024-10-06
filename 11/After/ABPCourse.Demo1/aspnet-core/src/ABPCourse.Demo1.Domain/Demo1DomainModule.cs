@@ -59,6 +59,7 @@ public class Demo1DomainModule : AbpModule
         Configure<AbpMultiTenancyOptions>(options =>
         {
             options.IsEnabled = MultiTenancyConsts.IsEnabled;
+            options.DatabaseStyle = MultiTenancyDatabaseStyle.PerTenant;
         });
 
 #if DEBUG

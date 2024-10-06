@@ -10,7 +10,7 @@ namespace ABPCourse.Demo1.Configurations
         {
             builder.ConfigureByConvention();
 
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.NameAr).HasMaxLength(Demo1Consts.GeneralTextMaxLength).IsRequired();
             builder.Property(x => x.NameEn).HasMaxLength(Demo1Consts.GeneralTextMaxLength).IsRequired();
             builder.Property(x => x.DescriptionAr).HasMaxLength(Demo1Consts.DescriptionTextMaxLength).IsRequired();
